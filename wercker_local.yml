@@ -1,0 +1,66 @@
+box: google/golang
+
+services:
+    - mongo
+    - redis
+
+build:
+  # The steps that will be executed on build
+  steps:
+    - setup-go-workspace:
+        package-dir: github.com/pivotal-pez/pezauth
+    - wercker/golint
+
+    - script:
+        name: env
+        code: env
+
+    # Get the dependencies
+    - script:
+        name: go get
+        code: |
+          cd $WERCKER_SOURCE_DIR
+          go version
+          go get -u github.com/tools/godep
+          export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+    # Client JS Tests
+    #- script:
+        #name: js tests
+        #code: |
+          #curl -sL https://deb.nodesource.com/setup | sudo bash -
+          #sudo apt-get install -y nodejs npm wget
+          #npm install karma karma-jasmine karma-chrome-launcher karma-phantomjs-launcher --save-dev
+          #npm install -g karma-cli
+          #curl -sL https://gist.githubusercontent.com/julionc/7476620/raw/b27b7e3b51b92be055ee46aefc0acfa459c0bb27/install_phantomjs.sh | bash -
+          #(cd public/js/ && sudo karma start karma.conf.js --single-run --log-level=debug)
+
+    # Test the project
+    - script:
+        name: go test
+        code: |
+          godep go test ./... -v -race
+    # Setting the coverage watermark low.
+    # This should be raised as we gain more coverage...
+    # Test coverage for the project
+    - script:
+        name: go test cover
+        code: |
+          (cd $WERCKER_SOURCE_DIR && ./testCoverage ./... $COVERAGE_WATERMARK)
+    - script:
+        name: build the server binary
+        code: |
+          godep go build main.go
+          cp -R ./ ${WERCKER_OUTPUT_DIR}
+    - script:
+        name: download wget and cf cli
+        code: |
+          sudo apt-get install -y wget
+          wget http://go-cli.s3-website-us-east-1.amazonaws.com/releases/v6.11.1/cf-linux-amd64.tgz
+          tar -zxvf cf-linux-amd64.tgz
+          export CF_CLI=$(pwd)/cf
+    - script:
+        name: push to cloudfoundry
+        code: |
+           $CF_CLI login -a $CF_APIURL -u $CF_USER -p $CF_PASS
+           $CF_CLI target -o $CF_ORG -s $CF_SPACE
+           $CF_CLI push $CF_APPNAME -d $CF_DOMAINNAME -n $CF_HOSTNAME -p ${WERCKER_OUTPUT_DIR}

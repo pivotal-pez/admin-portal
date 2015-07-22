@@ -1,0 +1,2 @@
+wercker --environment myenv build --wercker-yml wercker_local.yml
+rm -rf _projects _builds _steps

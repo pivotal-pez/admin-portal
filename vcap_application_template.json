@@ -1,0 +1,9 @@
+{
+  "application_name": "pezauth",
+  "application_uris": [
+   "http://{{.DOCKER_IP}}.xip.io"
+  ],
+  "uris": [
+   "http://{{.DOCKER_IP}}.xip.io"
+  ]
+}

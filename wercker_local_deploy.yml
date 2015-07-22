@@ -1,0 +1,50 @@
+box: google/golang
+
+services:
+    - mongo
+    - redis
+
+dev:
+  # The steps that will be executed on build
+  steps:
+    - setup-go-workspace:
+      package-dir: github.com/pivotal-pez/admin-portal
+    - wercker/golint
+
+    - script:
+        name: env
+        code: env
+
+    # Get the dependencies
+    - script:
+        name: go get
+        code: |
+          cd $WERCKER_SOURCE_DIR
+          go version
+          go get -u github.com/tools/godep
+          go get -u github.com/datianshi/envtemplate
+          export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+    - script:
+        name: set vcap services/application
+        code: |
+          export VCAP_SERVICES=`envtemplate -file=vcap_services_template.json`
+          export VCAP_APPLICATION=`envtemplate -file=vcap_application_template.json`
+    - script:
+        name: go test
+        code: |
+          godep go test ./... -v -race
+    # Setting the coverage watermark low.
+    # This should be raised as we gain more coverage...
+    # Test coverage for the project
+    - script:
+        name: go test cover
+        code: |
+          (cd $WERCKER_SOURCE_DIR && ./testCoverage ./... $COVERAGE_WATERMARK)
+    - script:
+        name: build the server binary
+        code: |
+          godep go build main.go
+    - internal/watch:
+        code: >
+          PORT=80
+          ./main

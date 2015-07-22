@@ -1,0 +1,42 @@
+envfile="=====================================
+# Cloudfoundry environment
+
+X_CF_USER=xxx@pivotal.io
+X_CF_PASS=xxxxxxxxxx
+X_CF_ORG=sding-pivot-org
+X_CF_SPACE=development
+X_CF_APPNAME=pezauth
+X_CF_HOSTNAME=pezauth
+X_CF_DOMAINNAME=cfapps.pez.pivotal.io
+X_CF_LOGINURL=login.run.pez.pivotal.io
+# Wercker debug
+
+X_DEBUG_STEP=true
+
+#New Relic
+X_NEWRELIC_APP=golang
+X_NEWRELIC_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# SMTP Server
+X_SMTP_HOST=smtp.vchs.pivotal.io
+X_SMTP_PORT=25
+X_SMTP_SUPPORT_EMAIL=xxxxxxxxxxxxxx
+
+# Google oauth client key
+X_GOOGLE_CLIENT_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+X_GOOGLE_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Local DOCKER IP Address
+X_DOCKER_IP=192.168.59.104
+==============================================
+"
+
+if [ ! -e "$1" ]
+then
+  echo -e "./runlocaldeploy myenv\n\n"
+  echo "Please provide your own environment file, Sample myenv file content:"
+  echo "$envfile"
+  exit 1
+fi
+
+wercker --environment $1 dev --wercker-yml wercker_local_deploy.yml --publish 80

@@ -1,0 +1,20 @@
+UPS_PEZ_HERITAGE_ADMIN_NAME="pez-heritage-admin-service" \
+HERITAGE_LOGIN_TARGET_NAME="login-target" \
+HERITAGE_LOGIN_USER_NAME="login-user" \
+HERITAGE_LOGIN_PASS_NAME="login-pass" \
+HERITAGE_CC_TARGET_NAME="cc-target" \
+MONGO_DB_NAME="pezauth" \
+MONGO_COLLECTION_NAME="org_users" \
+MONGO_SERVICE_NAME="pezauth-mongo" \
+MONGO_URI_NAME="uri" \
+REDIS_SERVICE_NAME="pezauth-redis" \
+REDIS_HOSTNAME_NAME="hostname" \
+REDIS_PASSWORD_NAME="password" \
+REDIS_PORT_NAME="port" \
+VCAP_APPLICATION=`cat service/vcap_application.local` \
+VCAP_SERVICES=`cat ~/vcap_services.local` \
+PORT=3000 \
+NEWRELIC_SERVICE_NAME=pez-heritage-newrelic \
+NEWRELIC_KEY_NAME=newrelic-key \
+NEWRELIC_APP_NAME=newrelic-app \
+godep go run main.go

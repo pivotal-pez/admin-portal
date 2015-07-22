@@ -1,0 +1,1 @@
+wercker build --git-domain github.com --git-owner pivotal-pez --git-repository admin-portal 
