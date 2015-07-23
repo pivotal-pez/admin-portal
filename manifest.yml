@@ -1,12 +1,11 @@
 ---
-applications:
-  - name: adminportal
-  buildpack: http://github.com/ryandotsmith/null-buildpack.git
-  command: ./main
-  host: adminportal
-  domains:
-  - pezapp.io 
-  - cfapps.pez.pivotal.io
-  #env:
-    #TGL_FEATURE1: false
-    #TGL_FEATURE2: false
+name: adminportal
+buildpack: http://github.com/ryandotsmith/null-buildpack.git
+command: ./main
+host: adminportal
+domains:
+- pezapp.io 
+- cfapps.pez.pivotal.io
+#env:
+  #TGL_FEATURE1: false
+  #TGL_FEATURE2: false
