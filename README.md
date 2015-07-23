@@ -12,6 +12,9 @@ $ curl -L https://install.wercker.com | sh
 #copy the sample env config file
 $ cp myenv.example myenv # fill in your details in the newly created myenv file
 
+#copy the sample wercker local deployment manifest
+$ cp wercker_local_deploy.example wercker_local_deploy.yml # fill in your details in the newly created myenv file
+
 # make sure a docker host is running
 $ boot2docker up && $(boot2docker shellinit)
 

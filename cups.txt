@@ -1,0 +1,1 @@
+cf cups admin-user-information -p "cf-base-uri, cf-user, cf-pass"

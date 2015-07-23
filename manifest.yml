@@ -6,6 +6,8 @@ host: adminportal
 domains:
 - pezapp.io 
 - cfapps.pez.pivotal.io
+services:
+- admin-user-information
 #env:
   #TGL_FEATURE1: false
   #TGL_FEATURE2: false
