@@ -73,8 +73,6 @@ deploy:
         api_url: $CF_APIURL
         app_name: $CF_APPNAME
         use_manifest: true
-        host: $CF_HOSTNAME
-        domain: $CF_DOMAINNAME
 
     - xchapter7x/flowy-release:
         action: "tag-only-release"

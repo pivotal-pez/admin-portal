@@ -20,8 +20,27 @@
 			"Rev": "b65063311fac6cbf84d3538f5715f7847e648322"
 		},
 		{
+			"ImportPath": "github.com/onsi/ginkgo",
+			"Comment": "v1.1.0-30-g5ce32b7",
+			"Rev": "5ce32b7910cdddcdd8bac6d761e2de9f27f9377b"
+		},
+		{
+			"ImportPath": "github.com/onsi/gomega",
+			"Comment": "v1.0-26-gdc751ce",
+			"Rev": "dc751ce5f266d83c26fae5c0a9093973b29cb61d"
+		},
+		{
 			"ImportPath": "github.com/oxtoacart/bpool",
 			"Rev": "754d38fccfc6e52083355014b6abc8d626445dfd"
+		},
+		{
+			"ImportPath": "github.com/pivotal-pez/pezdispenser/cloudfoundryclient",
+			"Comment": "v0.0.22-18-ga6c94fd",
+			"Rev": "a6c94fded031c1020feb3d4d16192ef84008281f"
+		},
+		{
+			"ImportPath": "github.com/xchapter7x/cloudcontroller-client",
+			"Rev": "795e287327dd3faa6a5b65e000779cffe301cb3a"
 		}
 	]
 }

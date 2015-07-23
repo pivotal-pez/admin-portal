@@ -27,3 +27,4 @@ myenv
 _builds/
 _projects/
 _steps/
+wercker_local_deploy.yml

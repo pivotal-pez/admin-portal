@@ -1,9 +1,5 @@
 box: google/golang
 
-services:
-    - mongo
-    - redis
-
 dev:
   # The steps that will be executed on build
   steps:
@@ -46,5 +42,8 @@ dev:
           godep go build main.go
     - internal/watch:
         code: >
+          CF_USER=xxxxxxxxxxxxxxxxxxx
+          CF_PASS=xxxxxxxxxxxxxxxxxxx
+          CF_BASE_URI=xxxxxxxxxxxxxxx
           PORT=80
           ./main

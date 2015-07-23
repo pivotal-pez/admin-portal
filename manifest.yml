@@ -1,43 +1,12 @@
 ---
 applications:
-- name: pezauth
+  - name: adminportal
   buildpack: http://github.com/ryandotsmith/null-buildpack.git
   command: ./main
-  services:
-    - pezauth-redis
-    - pezauth-mongo
-    - pezvalidator-service
-    - pez-heritage-admin-service
-    - pez-heritage-newrelic
-    - oauth-client-details
-    - email-server-service
-  env:
-    REDIS_SERVICE_NAME: pezauth-redis
-    REDIS_HOSTNAME_NAME: host
-    REDIS_PASSWORD_NAME: password
-    REDIS_PORT_NAME: port
-    UPS_PEZVALIDATOR_NAME: pezvalidator-service
-    UPS_PEZ_HERITAGE_ADMIN_NAME: pez-heritage-admin-service
-    HERITAGE_LOGIN_TARGET_NAME: login-target
-    HERITAGE_LOGIN_USER_NAME: login-user
-    HERITAGE_LOGIN_PASS_NAME: login-pass
-    HERITAGE_CC_TARGET_NAME: cc-target
-    MONGO_SERVICE_NAME: pezauth-mongo
-    MONGO_URI_NAME: uri
-    MONGO_COLLECTION_NAME: org_users
-    NEWRELIC_SERVICE_NAME: pez-heritage-newrelic
-    NEWRELIC_KEY_NAME: newrelic-key
-    NEWRELIC_APP_NAME: newrelic-app
-    OAUTH2_SERVICE_NAME: oauth-client-details
-    OAUTH2_CLIENT_ID: client-id
-    OAUTH2_CLIENT_SECRET: client-secret
-    #SMTP_HOST: smtp.vchs.pivotal.io
-    SMTP_SERVICE_NAME: email-server-service
-    SMTP_HOST: smtp-host
-    SMTP_PORT: smtp-port
-    SMTP_USERNAME: smtp-port
-    SMTP_PASSWORD: smtp-password
-    SUPPORT_EMAIL: support-email
+  host: adminportal
+  domains:
+  - pezapp.io 
+  - cfapps.pez.pivotal.io
   #env:
     #TGL_FEATURE1: false
     #TGL_FEATURE2: false
