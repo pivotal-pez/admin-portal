@@ -13,7 +13,13 @@ $ curl -L https://install.wercker.com | sh
 $ cp myenv.example myenv # fill in your details in the newly created myenv file
 
 #copy the sample wercker local deployment manifest
-$ cp wercker_local_deploy.example wercker_local_deploy.yml # fill in your details in the newly created myenv file
+$ cp wercker_local_deploy.example wercker_local_deploy.yml # fill in your details in the newly created file
+
+
+#copy the sample vcap_services definition
+$ cp vcap_services_template.json.example vcap_services_template.json # fill in your details in the newly created file
+
+
 
 # make sure a docker host is running
 $ boot2docker up && $(boot2docker shellinit)

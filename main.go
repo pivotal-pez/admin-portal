@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
+	"github.com/cloudfoundry-community/go-cfenv"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"github.com/pivotal-pez/admin-portal/users"
@@ -27,6 +27,7 @@ func (s *heritage) CCTarget() string {
 }
 
 func main() {
+	cfapp, _ := cfenv.Current()
 	m := martini.Classic()
 	m.Use(render.Renderer())
 	m.Use(martini.Static("public"))
@@ -41,17 +42,8 @@ func main() {
 	})
 
 	m.Get("/v1/info/users", func(log *log.Logger, r render.Render) {
-		//grab total user count, okta users, uaa users, orphaned users
-		baseURI := os.Getenv("CF_BASE_URI")
-		user := os.Getenv("CF_USER")
-		pass := os.Getenv("CF_PASS")
-		loginURI := fmt.Sprintf("https://%s.%s", "login", baseURI)
-		apiURI := fmt.Sprintf("https://%s.%s", "api", baseURI)
-		heritageClient := &heritage{
-			Client:   ccclient.New(loginURI, user, pass, new(http.Client)),
-			ccTarget: apiURI,
-		}
-		heritageClient.Login()
+		creds := getAdminCreds(cfapp)
+		heritageClient := getHeritageClient(creds)
 		cfclient := cf.NewCloudFoundryClient(heritageClient, log)
 		userSearch := new(users.UserSearch).Init(cfclient)
 		userList, _ := userSearch.List("", "")
@@ -61,4 +53,44 @@ func main() {
 	})
 
 	m.Run()
+}
+
+const (
+	AdminServiceName = "admin-user-information"
+	AdminURI         = "cf-base-uri"
+	AdminUser        = "cf-user"
+	AdminPass        = "cf-pass"
+)
+
+type cfAdminCreds struct {
+	AdminURI  string
+	AdminUser string
+	AdminPass string
+	LoginURI  string
+	APIURI    string
+}
+
+func getHeritageClient(creds *cfAdminCreds) (heritageClient *heritage) {
+	heritageClient = &heritage{
+		Client:   ccclient.New(creds.LoginURI, creds.AdminUser, creds.AdminPass, new(http.Client)),
+		ccTarget: creds.APIURI,
+	}
+	heritageClient.Login()
+	return
+}
+
+func getAdminCreds(cfapp *cfenv.App) (adminCreds *cfAdminCreds) {
+	if cfAdminService, err := cfapp.Services.WithName(AdminServiceName); err == nil {
+		creds := cfAdminService.Credentials
+		adminCreds = &cfAdminCreds{
+			AdminURI:  creds[AdminURI],
+			AdminUser: creds[AdminUser],
+			AdminPass: creds[AdminPass],
+			LoginURI:  fmt.Sprintf("https://%s.%s", "login", creds[AdminURI]),
+			APIURI:    fmt.Sprintf("https://%s.%s", "api", creds[AdminURI]),
+		}
+	} else {
+		panic(fmt.Sprintf("There is a problem with your required service binding %s: %s", AdminServiceName, err.Error()))
+	}
+	return
 }
