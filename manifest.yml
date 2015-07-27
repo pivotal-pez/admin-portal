@@ -3,6 +3,10 @@ name: adminportal
 buildpack: http://github.com/ryandotsmith/null-buildpack.git
 command: ./main
 host: adminportal
+hosts:
+- adminportal
+- stats
+- info
 domains:
 - pezapp.io 
 - cfapps.pez.pivotal.io

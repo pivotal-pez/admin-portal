@@ -1,1 +1,14 @@
-{}
+{"user-provided": [
+        {
+          "name": "admin-user-information",
+          "label": "user-provided",
+          "tags": [],
+          "credentials": {
+            "cf-base-uri": "xxxxxxxxxxxxxxxxxx",
+            "cf-pass": "xxxxxxxxxxxxxxxxxxxxxx",
+            "cf-user": "xxxxxxxxxxxxxxxxxxxxxx"
+          },
+          "syslog_drain_url": ""
+        }
+      ]
+}

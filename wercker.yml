@@ -19,6 +19,16 @@ build:
           go get -u github.com/tools/godep
           export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
 
+    # Client JS Tests
+    - script:
+        name: js tests
+        code: |
+          curl -sL https://deb.nodesource.com/setup | sudo bash -
+          sudo apt-get install -y nodejs npm wget libfontconfig1 libfreetype6
+          npm install karma karma-jasmine karma-phantomjs-launcher --save-dev
+          npm install -g karma-cli
+          (cd public/js/ && karma start karma.conf.js --single-run --log-level=debug)
+
     # Test the project
     - script:
         name: go test
@@ -72,6 +82,7 @@ deploy:
         space: $CF_SPACE
         api_url: $CF_APIURL
         app_name: $CF_APPNAME
+        random_route: $CF_RANDOM_ROUTE
         use_manifest: true
 
     - xchapter7x/flowy-release:

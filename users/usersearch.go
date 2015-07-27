@@ -78,8 +78,6 @@ func (s *UserSearch) ListUserSpaces(userGUID string) (resObj *cf.APIResponseList
 	if res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, path, nil); res.StatusCode == SpacesSuccessStatusCode {
 		b, _ := ioutil.ReadAll(res.Body)
 		json.Unmarshal(b, &resObj)
-
-	} else {
 		err = ErrListUserSpaces
 	}
 	return

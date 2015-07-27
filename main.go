@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/cloudfoundry-community/go-cfenv"
 	"github.com/go-martini/martini"
+	"github.com/jasonlvhit/gocron"
 	"github.com/martini-contrib/render"
 	"github.com/pivotal-pez/admin-portal/users"
 	cf "github.com/pivotal-pez/pezdispenser/cloudfoundryclient"
@@ -27,6 +29,8 @@ func (s *heritage) CCTarget() string {
 }
 
 func main() {
+	scheduler := gocron.NewScheduler()
+	localLogger := log.New(os.Stdout, "[martini] ", 0)
 	cfapp, _ := cfenv.Current()
 	m := martini.Classic()
 	m.Use(render.Renderer())
@@ -42,17 +46,28 @@ func main() {
 	})
 
 	m.Get("/v1/info/users", func(log *log.Logger, r render.Render) {
-		creds := getAdminCreds(cfapp)
-		heritageClient := getHeritageClient(creds)
-		cfclient := cf.NewCloudFoundryClient(heritageClient, log)
-		userSearch := new(users.UserSearch).Init(cfclient)
-		userList, _ := userSearch.List("", "")
-		userBlob := new(users.UserAggregate)
-		userBlob.Compile(userList)
-		r.JSON(200, userBlob)
+		r.JSON(200, localCache.UserBlob)
 	})
 
+	scheduler.Every(1).Minute().Do(func() {
+		FetchUserInfo(cfapp, localLogger)
+	})
+	scheduler.RunAll()
+	go func() {
+		scheduler.Start()
+	}()
 	m.Run()
+}
+
+func FetchUserInfo(cfapp *cfenv.App, log *log.Logger) {
+	log.Printf("running FetchUserInfo cron")
+	creds := getAdminCreds(cfapp)
+	heritageClient := getHeritageClient(creds)
+	cfclient := cf.NewCloudFoundryClient(heritageClient, log)
+	userSearch := new(users.UserSearch).Init(cfclient)
+	userList, _ := userSearch.List("", "")
+	localCache.UserBlob = new(users.UserAggregate)
+	localCache.UserBlob.Compile(userList)
 }
 
 const (
@@ -61,6 +76,14 @@ const (
 	AdminUser        = "cf-user"
 	AdminPass        = "cf-pass"
 )
+
+var (
+	localCache ghettoCache
+)
+
+type ghettoCache struct {
+	UserBlob *users.UserAggregate
+}
 
 type cfAdminCreds struct {
 	AdminURI  string

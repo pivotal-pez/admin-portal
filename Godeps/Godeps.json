@@ -21,6 +21,10 @@
 			"Rev": "6241001738f6e1b1ea7c4a4089195e1b0681609a"
 		},
 		{
+			"ImportPath": "github.com/jasonlvhit/gocron",
+			"Rev": "46aa69e77e4ee58d16bc909b56bc4d1dabb93c6b"
+		},
+		{
 			"ImportPath": "github.com/martini-contrib/render",
 			"Rev": "b65063311fac6cbf84d3538f5715f7847e648322"
 		},
