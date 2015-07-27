@@ -11,7 +11,7 @@ var usersApp = angular.module('UsersApp', [], function($interpolateProvider) {
       empty: "-"
     };
 
-    $interval( function(){ users.getUsersInfo(); }, refreshInterval, true);
+    $interval( function(){ users.getUsersInfo(); }, refreshInterval, 0, true);
 
     $timeout(function () {
       users.getUsersInfo();
