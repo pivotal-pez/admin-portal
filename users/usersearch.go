@@ -1,9 +1,7 @@
 package users
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
@@ -53,32 +51,6 @@ func (s *UserSearch) List(usertype, username string) (users cf.UserAPIResponse, 
 	if u, err = s.Client.QueryUsers(1, 1, "id", ""); err == nil {
 		query := s.BuildQuery(usertype, username)
 		users, err = s.Client.QueryUsers(1, u.TotalResults, "", query)
-	}
-	return
-}
-
-//ListUserOrg - lists the matches from a query on guid for orgs
-func (s *UserSearch) ListUserOrgs(userGUID string) (resObj *cf.APIResponseList, err error) {
-	path := fmt.Sprintf("/v2/users/%s/organizations", userGUID)
-
-	if res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, path, nil); res.StatusCode == OrgsSuccessStatusCode {
-		b, _ := ioutil.ReadAll(res.Body)
-		json.Unmarshal(b, &resObj)
-
-	} else {
-		err = ErrListUserOrgs
-	}
-	return
-}
-
-//ListUserSpaces - lists the matches from a query on guid for spaces
-func (s *UserSearch) ListUserSpaces(userGUID string) (resObj *cf.APIResponseList, err error) {
-	path := fmt.Sprintf("/v2/users/%s/spaces", userGUID)
-
-	if res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, path, nil); res.StatusCode == SpacesSuccessStatusCode {
-		b, _ := ioutil.ReadAll(res.Body)
-		json.Unmarshal(b, &resObj)
-		err = ErrListUserSpaces
 	}
 	return
 }
