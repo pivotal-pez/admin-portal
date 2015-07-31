@@ -1,4 +1,4 @@
-angular.module('AppsApp', ['tc.chartjs'])
+angular.module('AppsApp', [])
   .controller('AppsController', function($scope, $http, $interval, $timeout, $window) {
     var apps = this;
     var refreshInterval = 30000;
