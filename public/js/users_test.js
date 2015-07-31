@@ -11,7 +11,7 @@ describe('UsersController', function() {
     $window = $injector.get('$window');
   }));
 
-  describe('$scope.myName & myEmail', function() {
+  describe('$scope.* (user counts)', function() {
     it('should be initialized as undefined', function() {
       var $scope = {};
       var controller = $controller('UsersController', { $scope: $scope });

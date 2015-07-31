@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net/url"
 	"strings"
 
 	cf "github.com/pivotal-pez/pezdispenser/cloudfoundryclient"
@@ -28,7 +29,7 @@ func (s *AppSearch) GetAppCount() (appCount int) {
 
 func (s *AppSearch) CompileAllApps() {
 	var responseList cf.APIResponseList
-	res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, appRESTPath, fmt.Sprintf("results-per-page=%d", s.AppStats.TotalAppCount))
+	res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, appRESTPath, url.QueryEscape(fmt.Sprintf("results-per-page=%d", s.AppStats.TotalAppCount)))
 	bodyBytes, _ := ioutil.ReadAll(res.Body)
 	json.Unmarshal(bodyBytes, &responseList)
 
@@ -43,16 +44,20 @@ func (s *AppSearch) processApplicationRecord(appRecord cf.APIResponse) {
 }
 
 func (s *AppSearch) processAI(appRecord cf.APIResponse) {
-	s.AppStats.TotalInstanceCount += int(appRecord.Entity["instances"].(float64))
+	s.AppStats.TotalInstanceCount += int(appRecord.Entity[instanceFieldname].(float64))
 }
 
 func (s *AppSearch) processBP(appRecord cf.APIResponse) {
-	var buildpackName string
+	var buildpackFields []string
 
 	if appRecord.Entity[buildpackFieldname] != nil {
-		buildpackName = appRecord.Entity[buildpackFieldname].(string)
+		buildpackFields = append(buildpackFields, strings.ToUpper(appRecord.Entity[buildpackFieldname].(string)))
 	}
-	s.checkAgainstRegisteredBuildpacks(buildpackName)
+
+	if appRecord.Entity[detectedBuildpackFieldname] != nil {
+		buildpackFields = append(buildpackFields, strings.ToUpper(appRecord.Entity[detectedBuildpackFieldname].(string)))
+	}
+	s.checkAgainstRegisteredBuildpacks(strings.Join(buildpackFields, " "))
 }
 
 func (s *AppSearch) checkAgainstRegisteredBuildpacks(buildpackName string) {

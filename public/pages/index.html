@@ -38,7 +38,7 @@
 
 </head>
 
-<body>
+<body ng-app="MainApp" >
 
     <div id="wrapper">
 
@@ -268,7 +268,7 @@
         </nav>
 
         <div id="page-wrapper">
-          <div ng-app="UsersApp" ng-controller="UsersController as users" ><!-- user information block -->
+          <div ng-controller="UsersController as users" ><!-- user information block -->
             <div class="row">
                 <div class="col-lg-12">
                   <h1 class="page-header">User Information </h1>
@@ -343,6 +343,7 @@
           </div><!-- /.user information block -->
 
 
+          <div ng-controller="AppsController as apps" ><!-- app information block -->
             <div class="row">
                 <div class="col-lg-12">
                   <h1 class="page-header">Application Information</h1>
@@ -359,8 +360,8 @@
                                     <i class="fa fa-gears fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Total Users</div>
+                                    <div class="huge">{*{ totalAppCount }*}</div>
+                                    <div>Total Application Count</div>
                                 </div>
                             </div>
                         </div>
@@ -374,8 +375,8 @@
                                     <i class="fa fa-gears fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Managed Users</div>
+                                    <div class="huge">{*{ totalInstanceCount }*}</div>
+                                    <div>Application Instances</div>
                                 </div>
                             </div>
                         </div>
@@ -413,7 +414,7 @@
                 </div>
             </div>
             <!-- /.row -->
-
+          </div><!-- /.div app information block -->
 
 
 
@@ -646,6 +647,8 @@
     <!-- Angular Apps -->
     <script src="../js/angular.min.js"></script>
     <script src="../js/users.js"></script>
+    <script src="../js/apps.js"></script>
+    <script src="../js/main.js"></script>
 
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>

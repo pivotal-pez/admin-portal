@@ -1,7 +1,4 @@
-var usersApp = angular.module('UsersApp', [], function($interpolateProvider) {
-      $interpolateProvider.startSymbol('{*{');
-      $interpolateProvider.endSymbol('}*}');
-  })
+angular.module('UsersApp', [])
   .controller('UsersController', function($scope, $http, $interval, $timeout, $window) {
     var users = this;
     var refreshInterval = 30000;

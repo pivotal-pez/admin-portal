@@ -1,12 +1,14 @@
 package applications
 
 const (
-	buildpackFieldname = "buildpack"
-	javaMatcher        = "java"
-	rubyMatcher        = "ruby"
-	nodeMatcher        = "nodejs"
-	goMatcher          = "go"
-	pyMatcher          = "python"
-	phpMatcher         = "php"
-	appRESTPath        = "/v2/apps"
+	buildpackFieldname         = "buildpack"
+	detectedBuildpackFieldname = "detected_buildpack"
+	instanceFieldname          = "instances"
+	javaMatcher                = "JAVA"
+	rubyMatcher                = "RUBY"
+	nodeMatcher                = "NODEJS"
+	goMatcher                  = "GO"
+	pyMatcher                  = "PYTHON"
+	phpMatcher                 = "PHP"
+	appRESTPath                = "/v2/apps"
 )
