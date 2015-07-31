@@ -113,21 +113,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-users fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">{*{ orphanedUsers }*}</div>
-                                    <div>Orphaned Users</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- /.row -->
           </div><!-- /.user information block -->
@@ -137,6 +122,7 @@
             <div class="row">
                 <div class="col-lg-12">
                   <h1 class="page-header">Application Information</h1>
+                  <span style="color:red">{*{ userInfoStatus }*}</span>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -172,6 +158,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-6">
+                  <canvas tc-chartjs-doughnut chart-options="options" chart-data="data" auto-legend></canvas>
+                </div>
             </div>
             <!-- /.row -->
           </div><!-- /.div app information block -->
@@ -179,7 +168,7 @@
             <div class="row">
 
                 <div class="col-lg-12">
-                  <h1 class="page-header">Events</h1>
+                  <h1 class="page-header">Events / Stats</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -247,6 +236,7 @@
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-4 -->
+                
             </div>
             <!-- /.row -->
         </div>
@@ -255,14 +245,16 @@
     </div>
     <!-- /#wrapper -->
 
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
     <!-- Angular Apps -->
-    <script src="../js/angular.min.js"></script>
+    <script src="../bower_components/Chart.js/Chart.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/tc-angular-chartjs/dist/tc-angular-chartjs.min.js"></script>
     <script src="../js/users.js"></script>
     <script src="../js/apps.js"></script>
     <script src="../js/main.js"></script>
-
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -272,6 +264,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
 
 </body>
 
