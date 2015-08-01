@@ -35,18 +35,18 @@ angular.module('AppsApp', [])
       //Boolean - Whether we animate scaling the Doughnut from the centre
       animateScale : false,
       //String - A legend template
-      legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+      //legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
     };
 
     apps.setDonutUX = function(data) {
       $scope.data = [
-        { value: data.JavaBPCount, color: '#F7464A', highlight: '#FF5A5E', label: 'Java'},
-        { value: data.RubyBPCount, color: '#46BFBD', highlight: '#5AD3D1', label: 'Ruby'},
-        { value: data.NodeBPCount, color: '#46BFBD', highlight: '#5AD3D1', label: 'NodeJs'},
-        { value: data.GOBPCount, color: '#46BFBD', highlight: '#5AD3D1', label: 'GOLang'},
-        { value: data.PythonBPCount, color: '#46BFBD', highlight: '#5AD3D1', label: 'Python'},
-        { value: data.PHPBPCount, color: '#FDB45C', highlight: '#FFC870', label: 'PHP'},
-        { value: data.OtherBPCount, color: '#FDB45C', highlight: '#FFC870', label: 'Other'}
+        { value: data.JavaBPCount, color: '#F7464A', highlight: '#F7464A', label: 'Java'},
+        { value: data.RubyBPCount, color: '#7874af', highlight: '#7874af', label: 'Ruby'},
+        { value: data.NodeBPCount, color: '#298390', highlight: '#298390', label: 'NodeJs'},
+        { value: data.GOBPCount, color: '#54351c', highlight: '#54351c', label: 'GOLang'},
+        { value: data.PythonBPCount, color: '#68bbd8', highlight: '#68bbd8', label: 'Python'},
+        { value: data.PHPBPCount, color: '#5eb5d1', highlight: '#5eb5d10', label: 'PHP'},
+        { value: data.OtherBPCount, color: '#545483', highlight: '#545483', label: 'Other'}
       ];
     }
 
