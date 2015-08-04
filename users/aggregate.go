@@ -18,6 +18,7 @@ type (
 	}
 )
 
+//GetCurrentDate - function that returns the current date as a time.Time
 var GetCurrentDate = func() time.Time {
 	return time.Now()
 }
@@ -46,6 +47,7 @@ func (s *UserAggregate) compileCreateUserAggregate(createDate string) {
 	}
 }
 
+//GenerateUserCreateBuckets - method to generate create user history buckets on the aggregate object
 func (s *UserAggregate) GenerateUserCreateBuckets() {
 	now := GetCurrentDate()
 	s.CreateDayOverDay = make(map[string]int)
@@ -59,6 +61,7 @@ func (s *UserAggregate) GenerateUserCreateBuckets() {
 	}
 }
 
+//TimeStringifier - function to create a string from time.Time object in a specific standard format
 func TimeStringifier(t time.Time) string {
 	return fmt.Sprintf("%d-%02d-%02d", t.Year(), t.Month(), t.Day())
 }

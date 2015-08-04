@@ -17,14 +17,19 @@ import (
 )
 
 const (
+	//SuccessStatus - success status of a call to the rest API
 	SuccessStatus = 200
 )
 
 const (
+	//AdminServiceName - userprovided service name for admin user of foundation
 	AdminServiceName = "admin-user-information"
-	AdminURI         = "cf-base-uri"
-	AdminUser        = "cf-user"
-	AdminPass        = "cf-pass"
+	//AdminURI - foundatio uri cups fieldname
+	AdminURI = "cf-base-uri"
+	//AdminUser - admin users cups fieldname
+	AdminUser = "cf-user"
+	//AdminPass - admin pass cups fieldname
+	AdminPass = "cf-pass"
 )
 
 var (
@@ -85,6 +90,7 @@ func main() {
 	m.Run()
 }
 
+//FetchAppsInfo - function to poll for app information in the CCDB via REST API
 func FetchAppsInfo(cfapp *cfenv.App, log *log.Logger) {
 	log.Println("running FetchAppsInfo cron")
 	heritageClient := getHeritageClient(cfapp)
@@ -94,6 +100,7 @@ func FetchAppsInfo(cfapp *cfenv.App, log *log.Logger) {
 	localCache.AppsBlob = appSearch.AppStats
 }
 
+//FetchUserInfo - function to poll for user information in the UAA via REST API
 func FetchUserInfo(cfapp *cfenv.App, log *log.Logger) {
 	log.Printf("running FetchUserInfo cron")
 	heritageClient := getHeritageClient(cfapp)
