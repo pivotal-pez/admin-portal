@@ -20,6 +20,7 @@ describe('AppsController', function() {
       expect($scope.unManagedUsers).toEqual(undefined);
       expect($scope.orphanedUsers).toEqual(undefined);
       expect($scope.totalInstanceCount).toEqual(undefined);
+      expect($scope.totalRunningCount).toEqual(undefined);
       expect($scope.totalAppCount).toEqual(undefined);
       expect($scope.javaBPCount).toEqual(undefined);
       expect($scope.rubyBPCount).toEqual(undefined);
@@ -36,6 +37,7 @@ describe('AppsController', function() {
 
   describe('.getAppsInfo', function() {
     controlTotalInstanceCount = 70;
+    controlTotalRunningCount = 45 ;
     controlTotalAppCount = 156;
     controlJavaBPCount = 21;
     controlRubyBPCount = 8;
@@ -53,6 +55,7 @@ describe('AppsController', function() {
       var $scope = {};
       it('should populate the app fields for display', function() {
         $httpBackend.when('GET', appsInfoURI).respond({"TotalInstanceCount" : controlTotalInstanceCount,
+                                                      "TotalRunningCount" : controlTotalRunningCount,
                                                       "TotalAppCount" : controlTotalAppCount,
                                                       "JavaBPCount" : controlJavaBPCount,
                                                       "RubyBPCount" : controlRubyBPCount,
@@ -69,6 +72,7 @@ describe('AppsController', function() {
         $httpBackend.flush();
 
         expect($scope.totalInstanceCount).toBe(controlTotalInstanceCount);
+        expect($scope.totalRunningCount).toBe(controlTotalRunningCount);
         expect($scope.totalAppCount).toBe(controlTotalAppCount);
         expect($scope.javaBPCount).toBe(controlJavaBPCount);
         expect($scope.rubyBPCount).toBe(controlRubyBPCount);
@@ -93,6 +97,7 @@ describe('AppsController', function() {
         $httpBackend.flush();
 
         expect($scope.totalInstanceCount).toBe(controlEmpty);
+        expect($scope.totalRunningCount).toBe(controlEmpty);
         expect($scope.totalAppCount).toBe(controlEmpty);
         expect($scope.javaBPCount).toBe(controlEmpty);
         expect($scope.rubyBPCount).toBe(controlEmpty);

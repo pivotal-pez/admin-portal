@@ -5,7 +5,8 @@ angular.module('AppsApp', [])
     var appsInfoURI = "/v1/info/apps";
     var messaging = {
       unavailable: "** Service Unavailable **",
-      empty: "-"
+      empty: "-",
+      zero: 0
     };
 
     $interval( function(){ apps.getAppsInfo(); }, refreshInterval, 0, true);
@@ -48,29 +49,32 @@ angular.module('AppsApp', [])
         { value: data.PHPBPCount, color: '#5eb5d1', highlight: '#5eb5d10', label: 'PHP'},
         { value: data.OtherBPCount, color: '#545483', highlight: '#545483', label: 'Other'}
       ];
+
     }
 
     apps.getAppsInfo = function() {
       var responsePromise = $http.get(appsInfoURI);
       responsePromise.success(function(data, status, headers, config) {
-        $scope.totalInstanceCount = data.TotalInstanceCount;
-        $scope.totalAppCount = data.TotalAppCount;
-        $scope.javaBPCount = data.JavaBPCount;
-        $scope.rubyBPCount = data.RubyBPCount;
-        $scope.nodeBPCount = data.NodeBPCount;
-        $scope.goBPCount = data.GOBPCount;
-        $scope.pythonBPCount = data.PythonBPCount;
-        $scope.phpBPCount = data.PHPBPCount;
-        $scope.otherBPCount = data.OtherBPCount;
-        $scope.stoppedStateCount = data.StoppedStateCount;
-        $scope.startedStateCount = data.StartedStateCount;
-        $scope.diegoAppsCount = data.DiegoAppsCount;
+        $scope.totalInstanceCount = data.TotalInstanceCount || messaging.empty;
+        $scope.totalRunningCount = data.TotalRunningCount || messaging.empty;
+        $scope.totalAppCount = data.TotalAppCount || messaging.empty;
+        $scope.javaBPCount = data.JavaBPCount || messaging.zero;
+        $scope.rubyBPCount = data.RubyBPCount || messaging.zero;
+        $scope.nodeBPCount = data.NodeBPCount || messaging.zero;
+        $scope.goBPCount = data.GOBPCount || messaging.zero;
+        $scope.pythonBPCount = data.PythonBPCount || messaging.zero;
+        $scope.phpBPCount = data.PHPBPCount || messaging.zero;
+        $scope.otherBPCount = data.OtherBPCount || messaging.zero;
+        $scope.stoppedStateCount = data.StoppedStateCount || messaging.zero;
+        $scope.startedStateCount = data.StartedStateCount || messaging.zero;
+        $scope.diegoAppsCount = data.DiegoAppsCount || messaging.zero;
         $scope.userInfoStatus = "";
         apps.setDonutUX(data);
       });
 
       responsePromise.error(function(data, status, headers, config) {
         $scope.totalInstanceCount = messaging.empty;
+        $scope.totalRunningCount = messaging.empty;
         $scope.totalAppCount = messaging.empty;
         $scope.javaBPCount = messaging.empty;
         $scope.rubyBPCount = messaging.empty;
