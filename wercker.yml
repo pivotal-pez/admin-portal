@@ -101,7 +101,7 @@ deploy:
         name: set release id var
         code: |
           git fetch --tags
-          export WERCKER_GITHUB_CREATE_RELEASE_ID=$(git log -n1 --pretty=format:%D $WERCKER_GIT_COMMIT | sed s/tag\:\ //g)
+          export WERCKER_GITHUB_CREATE_RELEASE_ID=`git log -n1 --pretty=format:%D HEAD^ | sed s/tag\:\ //g`
           echo $WERCKER_GITHUB_CREATE_RELEASE_ID
           
     - github-upload-asset:
