@@ -91,3 +91,13 @@ deploy:
         active: $GITFLOW_ACTIVE
         git_name: $GITFLOW_NAME
         git_email: $GITFLOW_EMAIL
+
+    - script:
+        name: package release bundle 
+        code: |
+          tar -cvzf adminportal.tgz manifest.yml cups.txt public main Procfile
+
+    - github-upload-asset:
+        token: $PEZ_GITHUB_KEY
+        file: adminportal.tgz
+        release_id: $VERSION_TAG 
