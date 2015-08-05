@@ -98,6 +98,6 @@ deploy:
           tar -cvzf adminportal.tgz manifest.yml cups.txt public main Procfile
 
     - github-upload-asset:
-        token: $PEZ_GITHUB_KEY
+        token: $PEZ_GITHUB_KEY_PUBLIC
         file: adminportal.tgz
         release_id: $VERSION_TAG 
