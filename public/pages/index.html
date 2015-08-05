@@ -58,67 +58,6 @@
         </nav>
 
         <div id="page-wrapper">
-          <div ng-controller="UsersController as users" ><!-- user information block -->
-            <div class="row">
-                <div class="col-lg-12">
-                  <h1 class="page-header">User Information </h1>
-                  <span style="color:red">{*{ userInfoStatus }*}</span>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row" >
-                <div class="col-lg-2 col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-users fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">{*{ totalUsers }*}</div>
-                                    <div>Total Users</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-users fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                  <div class="huge">{*{ managedUsers }*}</div>
-                                    <div>Managed</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-users fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                  <div class="huge">{*{ unManagedUsers }*}</div>
-                                  <div>UAA</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              <div class="col-lg-4 col-md-12">
-                      <canvas tc-chartjs-bar chart-options="options" chart-data="data"></canvas>                        </div>
-              </div>
-            <!-- /.row -->
-          </div><!-- /.user information block -->
-
           <div ng-controller="AppsController as apps" ><!-- app information block -->
             <div class="row">
                 <div class="col-lg-12">
@@ -180,6 +119,68 @@
             </div>
             <!-- /.row -->
           </div><!-- /.div app information block -->
+
+          <div ng-controller="UsersController as users" ><!-- user information block -->
+            <div class="row">
+                <div class="col-lg-12">
+                  <h1 class="page-header">User Information </h1>
+                  <span style="color:red">{*{ userInfoStatus }*}</span>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row" >
+                <div class="col-lg-2 col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{*{ totalUsers }*}</div>
+                                    <div>Total Users</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                  <div class="huge">{*{ managedUsers }*}</div>
+                                    <div>Managed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                  <div class="huge">{*{ unManagedUsers }*}</div>
+                                  <div>UAA</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <div class="col-lg-4 col-md-12">
+                      <canvas tc-chartjs-bar chart-options="options" chart-data="data"></canvas>                        </div>
+              </div>
+            <!-- /.row -->
+          </div><!-- /.user information block -->
+
           <div>
             <div class="row">
 
