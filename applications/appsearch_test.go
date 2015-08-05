@@ -24,8 +24,13 @@ var _ = Describe("AppSearch", func() {
 		appSearch.CompileAllApps()
 
 		It("should log the proper instance count", func() {
-			controlAICount := 14
+			controlAICount := 3
 			Ω(appSearch.AppStats.TotalInstanceCount).Should(Equal(controlAICount))
+		})
+
+		It("should log the proper running application count", func() {
+			controlRunningCount := 2
+			Ω(appSearch.AppStats.TotalRunningCount).Should(Equal(controlRunningCount))
 		})
 
 		It("should log the proper Buildpack count", func() {

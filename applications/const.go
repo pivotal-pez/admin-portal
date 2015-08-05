@@ -11,4 +11,6 @@ const (
 	pyMatcher                  = "PYTHON"
 	phpMatcher                 = "PHP"
 	appRESTPath                = "/v2/apps"
+	applicationRunningValue    = "STARTED"
+	stateFieldname             = "state"
 )

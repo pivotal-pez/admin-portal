@@ -44,10 +44,21 @@ func (s *AppSearch) CompileAllApps() {
 func (s *AppSearch) processApplicationRecord(appRecord cf.APIResponse) {
 	s.processAI(appRecord)
 	s.processBP(appRecord)
+	s.processRunningApps(appRecord)
 }
 
 func (s *AppSearch) processAI(appRecord cf.APIResponse) {
-	s.AppStats.TotalInstanceCount += int(appRecord.Entity[instanceFieldname].(float64))
+
+	if appRecord.Entity[stateFieldname].(string) == applicationRunningValue {
+		s.AppStats.TotalInstanceCount += int(appRecord.Entity[instanceFieldname].(float64))
+	}
+}
+
+func (s *AppSearch) processRunningApps(appRecord cf.APIResponse) {
+
+	if appRecord.Entity[stateFieldname].(string) == applicationRunningValue {
+		s.AppStats.TotalRunningCount++
+	}
 }
 
 func (s *AppSearch) processBP(appRecord cf.APIResponse) {

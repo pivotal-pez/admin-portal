@@ -10,6 +10,7 @@ type (
 	//AppAggregate - aggregation object for application information
 	AppAggregate struct {
 		TotalInstanceCount int
+		TotalRunningCount  int
 		TotalAppCount      int
 		JavaBPCount        int
 		RubyBPCount        int
