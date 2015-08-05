@@ -96,6 +96,7 @@ deploy:
         name: package release bundle 
         code: |
           tar -cvzf adminportal.tgz manifest.yml cups.txt public main Procfile
+          echo we have a version of $VERSION_TAG
 
     - github-upload-asset:
         token: $PEZ_GITHUB_KEY_PUBLIC
