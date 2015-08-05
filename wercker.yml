@@ -99,9 +99,16 @@ deploy:
     - script:
         name: set release id var
         code: |
+          git fetch --tags
           export WERCKER_GITHUB_CREATE_RELEASE_ID=`git log -n1 --pretty=format:%d HEAD^ | sed s/\(//g | sed s/\)//g`
           echo $WERCKER_GITHUB_CREATE_RELEASE_ID
           
+    - github-create-release:
+            token: $PEZ_GITHUB_KEY_PUBLIC
+            tag: $WERCKER_GITHUB_CREATE_RELEASE_ID
+            title: Application $GITHUB_RELEASE_VERSION
+            draft: true
+    
     - github-upload-asset:
         token: $PEZ_GITHUB_KEY_PUBLIC
         file: adminportal.tgz
