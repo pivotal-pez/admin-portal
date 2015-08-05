@@ -97,8 +97,13 @@ deploy:
         code: |
           tar -cvzf adminportal.tgz manifest.yml cups.txt public main Procfile
 
+    - script:
+        name: set release id var
+        code: |
+          export WERCKER_GITHUB_CREATE_RELEASE_ID=$(git log -n1 --pretty=format:%D HEAD^ | sed s/tag\:\ //g)
+          
     - github-upload-asset:
         token: $PEZ_GITHUB_KEY_PUBLIC
         file: adminportal.tgz
-        release_id: $(git log -n1 --pretty=format:%D HEAD^ | sed s/tag\:\ //g) 
+        release_id: $WERCKER_GITHUB_CREATE_RELEASE_ID
         content-type: application/x-gzip
