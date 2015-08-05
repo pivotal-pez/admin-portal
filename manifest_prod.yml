@@ -1,0 +1,9 @@
+---
+inherit: manifest.yml
+hosts:
+- adminportal
+- stats
+- info
+domains:
+- pezapp.io 
+- cfapps.pez.pivotal.io

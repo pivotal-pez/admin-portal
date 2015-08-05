@@ -84,6 +84,7 @@ deploy:
         app_name: $CF_APPNAME
         random_route: $CF_RANDOM_ROUTE
         use_manifest: true
+        manifest: $CF_MANIFEST_FILE_PATH
 
     - xchapter7x/flowy-release:
         action: "tag-only-release"
