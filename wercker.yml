@@ -82,7 +82,6 @@ deploy:
         space: $CF_SPACE
         api_url: $CF_APIURL
         app_name: $CF_APPNAME
-        random_route: $CF_RANDOM_ROUTE
         use_manifest: true
         manifest: $CF_MANIFEST_FILE_PATH
 
