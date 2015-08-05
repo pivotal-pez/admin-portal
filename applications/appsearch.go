@@ -10,6 +10,7 @@ import (
 	cf "github.com/pivotal-pez/pezdispenser/cloudfoundryclient"
 )
 
+//Init - initialize the state of your appsearch object
 func (s *AppSearch) Init(client cloudFoundryClient) *AppSearch {
 	s.Client = client
 	s.ClientTargetInfo, _ = s.Client.QueryAPIInfo()
@@ -18,6 +19,7 @@ func (s *AppSearch) Init(client cloudFoundryClient) *AppSearch {
 	return s
 }
 
+//GetAppCount - get the current application count
 func (s *AppSearch) GetAppCount() (appCount int) {
 	var responseList cf.APIResponseList
 	res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, appRESTPath, nil)
@@ -27,6 +29,7 @@ func (s *AppSearch) GetAppCount() (appCount int) {
 	return s.AppStats.TotalAppCount
 }
 
+//CompileAllApps - compile the information for all of your applications
 func (s *AppSearch) CompileAllApps() {
 	var responseList cf.APIResponseList
 	res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, appRESTPath, url.QueryEscape(fmt.Sprintf("results-per-page=%d", s.AppStats.TotalAppCount)))

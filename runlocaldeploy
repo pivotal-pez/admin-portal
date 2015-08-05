@@ -39,4 +39,6 @@ then
   exit 1
 fi
 
-wercker --environment $1 dev --wercker-yml wercker_local_deploy.yml --publish 80
+rm -fR _builds _steps _projects
+wercker --verbose --environment $1 dev --wercker-yml wercker_local_deploy.yml --publish 80
+rm -fR _builds _steps _projects

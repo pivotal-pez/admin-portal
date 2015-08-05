@@ -4,6 +4,29 @@ describe('UsersController', function() {
   var $controller;
   var $httpBackend;
   var userInfoURI = "/v1/info/users";
+  var controlDayOverDaySet = {
+    "2015-07-15":6,
+    "2015-07-16":4,
+    "2015-07-17":1,
+    "2015-07-18":1,
+    "2015-07-19":0,
+    "2015-07-20":11,
+    "2015-07-21":3,
+    "2015-07-22":0,
+    "2015-07-23":2,
+    "2015-07-24":3,
+    "2015-07-25":0,
+    "2015-07-26":0,
+    "2015-07-27":2,
+    "2015-07-28":4,
+    "2015-07-29":1,
+    "2015-07-30":1,
+    "2015-07-31":1,
+    "2015-08-01":0,
+    "2015-08-02":0,
+    "2015-08-03":0,
+    "2015-08-04":2
+  };
 
   beforeEach(inject(function($injector){
     $httpBackend = $injector.get('$httpBackend');
@@ -44,7 +67,34 @@ describe('UsersController', function() {
         expect($scope.unManagedUsers).toBe(controlUAACount);
         expect($scope.orphanedUsers).toBe(controlOrphanedCount);
         expect($scope.userInfoStatus).toBe("");
+        expect($scope.data).not.toBe({});
       });
+    });
+
+    describe("when successful response on a day over day user request", function() {
+      var $scope = {};
+      it('should return the proper labels for the display', function() {
+        $httpBackend.when('GET', userInfoURI).respond({"CreateDayOverDay":controlDayOverDaySet});
+        var controller = $controller('UsersController', { $scope: $scope });
+        controller.getUsersInfo();
+        $httpBackend.flush();
+
+        expect($scope.data).not.toEqual({});
+        expect($scope.data.labels).toEqual([ 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday' ]);
+      });
+
+      xit('should return the proper data sets for 3 weeks of history', function() {
+        $httpBackend.when('GET', userInfoURI).respond({"CreateDayOverDay":controlDayOverDaySet});
+        var controller = $controller('UsersController', { $scope: $scope });
+        controller.getUsersInfo();
+        $httpBackend.flush();
+
+        expect($scope.data).not.toEqual({});
+        expect($scope.data.datasets[0].data).not.toEqual([]);
+        expect($scope.data.datasets[1].data).not.toEqual([]);
+        expect($scope.data.datasets[2].data).not.toEqual([]);
+      });
+
     });
 
     describe("when un-successful response", function() {
@@ -60,6 +110,7 @@ describe('UsersController', function() {
         expect($scope.unManagedUsers).toBe(controlEmpty);
         expect($scope.orphanedUsers).toBe(controlEmpty);
         expect($scope.userInfoStatus).not.toBe("");
+        expect($scope.data).toEqual({});
       });
     });
   });

@@ -1,1 +1,3 @@
-wercker build --git-domain github.com --git-owner pivotal-pez --git-repository admin-portal 
+rm -fR _builds _steps _projects
+wercker --verbose build --git-domain github.com --git-owner pivotal-pez --git-repository admin-portal
+rm -fR _builds _steps _projects
