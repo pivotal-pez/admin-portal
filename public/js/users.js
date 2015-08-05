@@ -63,14 +63,19 @@ angular.module('UsersApp', [])
 
     users.SetDayOverDayDataset = function(dayOverDayObject) {
       var i = 0;
+      var dayDataSet = [];
 
       for (var key in dayOverDayObject) {
 
         if ( users.firstWeekOfData(i) ) {
           users.addDOWLabel(key);
         }
+        dayDataSet.push(dayOverDayObject[key]);
         i++;
       }
+      $scope.data.datasets[0].data = dayDataSet.slice(0,7);
+      $scope.data.datasets[1].data = dayDataSet.slice(7,14);
+      $scope.data.datasets[2].data = dayDataSet.slice(14,22);
       return dayOverDayObject;
     };
 

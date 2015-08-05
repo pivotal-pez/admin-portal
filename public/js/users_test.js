@@ -90,7 +90,7 @@ describe('UsersController', function() {
         expect($scope.data.labels.contains("Sunday")).toBe(true);
       });
 
-      xit('should return the proper data sets for 3 weeks of history', function() {
+      it('should return the proper data sets for 3 weeks of history', function() {
         $httpBackend.when('GET', userInfoURI).respond({"CreateDayOverDay":controlDayOverDaySet});
         var controller = $controller('UsersController', { $scope: $scope });
         controller.getUsersInfo();
@@ -98,8 +98,11 @@ describe('UsersController', function() {
 
         expect($scope.data).not.toEqual({});
         expect($scope.data.datasets[0].data).not.toEqual([]);
+        expect($scope.data.datasets[0].data).toEqual([6,4,1,1,0,11,3]);
         expect($scope.data.datasets[1].data).not.toEqual([]);
+        expect($scope.data.datasets[1].data).toEqual([0,2,3,0,0,2,4]);
         expect($scope.data.datasets[2].data).not.toEqual([]);
+        expect($scope.data.datasets[2].data).toEqual([1,1,1,0,0,0,2]);
       });
 
     });
