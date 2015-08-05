@@ -101,3 +101,4 @@ deploy:
         token: $PEZ_GITHUB_KEY_PUBLIC
         file: adminportal.tgz
         release_id: $VERSION_TAG 
+        content-type: application/x-gzip
