@@ -80,7 +80,14 @@ describe('UsersController', function() {
         $httpBackend.flush();
 
         expect($scope.data).not.toEqual({});
-        expect($scope.data.labels).toEqual([ 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday' ]);
+        expect($scope.data.labels.length).toEqual(7);
+        expect($scope.data.labels.contains("Monday")).toBe(true);
+        expect($scope.data.labels.contains("Tuesday")).toBe(true);
+        expect($scope.data.labels.contains("Wednesday")).toBe(true);
+        expect($scope.data.labels.contains("Thursday")).toBe(true);
+        expect($scope.data.labels.contains("Friday")).toBe(true);
+        expect($scope.data.labels.contains("Saturday")).toBe(true);
+        expect($scope.data.labels.contains("Sunday")).toBe(true);
       });
 
       xit('should return the proper data sets for 3 weeks of history', function() {
@@ -115,3 +122,13 @@ describe('UsersController', function() {
     });
   });
 });
+
+Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
