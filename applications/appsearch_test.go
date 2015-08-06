@@ -34,7 +34,7 @@ var _ = Describe("AppSearch", func() {
 		})
 
 		It("should log the proper running memory usage", func() {
-			controlMemory := float64(2)
+			controlMemory := float64(3)
 			Ω(appSearch.AppStats.TotalMemory).Should(Equal(controlMemory))
 		})
 
