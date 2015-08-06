@@ -100,7 +100,7 @@ deploy:
         name: set release id var
         code: |
           git fetch --tags
-          export WERCKER_GITHUB_CREATE_RELEASE_ID=`git log -n1 --pretty=format:%d HEAD^ | sed s/\(//g | sed s/\)//g`
+          export WERCKER_GITHUB_CREATE_RELEASE_ID=`git log -n1 --pretty=format:%d HEAD | sed s/\ //g | awk -F',' '{print $2}'`
           echo $WERCKER_GITHUB_CREATE_RELEASE_ID
           
     - github-create-release:
