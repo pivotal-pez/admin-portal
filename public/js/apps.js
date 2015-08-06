@@ -57,6 +57,7 @@ angular.module('AppsApp', [])
       responsePromise.success(function(data, status, headers, config) {
         $scope.totalInstanceCount = data.TotalInstanceCount || messaging.empty;
         $scope.totalMemory = data.TotalMemory || messaging.empty;
+        $scope.totalDisk = data.TotalDisk || messaging.empty;
         $scope.totalRunningCount = data.TotalRunningCount || messaging.empty;
         $scope.totalAppCount = data.TotalAppCount || messaging.empty;
         $scope.javaBPCount = data.JavaBPCount || messaging.zero;
@@ -76,6 +77,7 @@ angular.module('AppsApp', [])
       responsePromise.error(function(data, status, headers, config) {
         $scope.totalInstanceCount = messaging.empty;
         $scope.totalMemory = messaging.empty;
+        $scope.totalDisk = messaging.empty;
         $scope.totalRunningCount = messaging.empty;
         $scope.totalAppCount = messaging.empty;
         $scope.javaBPCount = messaging.empty;

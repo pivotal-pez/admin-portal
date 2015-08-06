@@ -46,6 +46,7 @@ func (s *AppSearch) processApplicationRecord(appRecord cf.APIResponse) {
 	s.processBP(appRecord)
 	s.processRunningApps(appRecord)
 	s.processMemory(appRecord)
+	s.processDisk(appRecord)
 }
 
 func (s *AppSearch) processMemory(appRecord cf.APIResponse) {
@@ -54,6 +55,15 @@ func (s *AppSearch) processMemory(appRecord cf.APIResponse) {
 		mem := appRecord.Entity[memoryFieldname].(float64)
 		instances := appRecord.Entity[instanceFieldname].(float64)
 		s.AppStats.TotalMemory += ((mem / 1024) * instances)
+	}
+}
+
+func (s *AppSearch) processDisk(appRecord cf.APIResponse) {
+
+	if appRecord.Entity[stateFieldname].(string) == applicationRunningValue {
+		disk := appRecord.Entity[diskFieldname].(float64)
+		instances := appRecord.Entity[instanceFieldname].(float64)
+		s.AppStats.TotalDisk += ((disk / 1024) * instances)
 	}
 }
 

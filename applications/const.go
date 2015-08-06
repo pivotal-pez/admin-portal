@@ -14,4 +14,5 @@ const (
 	applicationRunningValue    = "STARTED"
 	stateFieldname             = "state"
 	memoryFieldname            = "memory"
+	diskFieldname              = "disk_quota"
 )

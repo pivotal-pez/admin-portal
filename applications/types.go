@@ -10,6 +10,7 @@ type (
 	//AppAggregate - aggregation object for application information
 	AppAggregate struct {
 		TotalMemory        float64
+		TotalDisk          float64
 		TotalInstanceCount int
 		TotalRunningCount  int
 		TotalAppCount      int

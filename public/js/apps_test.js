@@ -16,6 +16,7 @@ describe('AppsController', function() {
       var $scope = {};
       var controller = $controller('AppsController', { $scope: $scope });
       expect($scope.totalMemory).toEqual(undefined);
+      expect($scope.totalDisk).toEqual(undefined);
       expect($scope.totalInstanceCount).toEqual(undefined);
       expect($scope.totalRunningCount).toEqual(undefined);
       expect($scope.totalAppCount).toEqual(undefined);
@@ -36,6 +37,7 @@ describe('AppsController', function() {
     controlTotalInstanceCount = 70;
     controlTotalRunningCount = 45 ;
     controlTotalMemory = 45 ;
+    controlTotalDisk = 45 ;
     controlTotalAppCount = 156;
     controlJavaBPCount = 21;
     controlRubyBPCount = 8;
@@ -55,6 +57,7 @@ describe('AppsController', function() {
         $httpBackend.when('GET', appsInfoURI).respond({"TotalInstanceCount" : controlTotalInstanceCount,
                                                       "TotalRunningCount" : controlTotalRunningCount,
                                                       "TotalMemory": controlTotalMemory,
+                                                      "TotalDisk": controlTotalDisk,
                                                       "TotalAppCount" : controlTotalAppCount,
                                                       "JavaBPCount" : controlJavaBPCount,
                                                       "RubyBPCount" : controlRubyBPCount,
@@ -72,6 +75,7 @@ describe('AppsController', function() {
 
         expect($scope.totalInstanceCount).toBe(controlTotalInstanceCount);
         expect($scope.totalMemory).toBe(controlTotalMemory);
+        expect($scope.totalDisk).toBe(controlTotalDisk);
         expect($scope.totalRunningCount).toBe(controlTotalRunningCount);
         expect($scope.totalAppCount).toBe(controlTotalAppCount);
         expect($scope.javaBPCount).toBe(controlJavaBPCount);
@@ -98,6 +102,7 @@ describe('AppsController', function() {
 
         expect($scope.totalInstanceCount).toBe(controlEmpty);
         expect($scope.totalMemory).toBe(controlEmpty);
+        expect($scope.totalDisk).toBe(controlEmpty);
         expect($scope.totalRunningCount).toBe(controlEmpty);
         expect($scope.totalAppCount).toBe(controlEmpty);
         expect($scope.javaBPCount).toBe(controlEmpty);
