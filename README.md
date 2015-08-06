@@ -2,7 +2,31 @@
 
 ### this is an admin portal to show some metrics about your foundation.
 
-## Running locally
+## Deploying a release binary to cloud foundry
+
+```
+# go to:
+# https://github.com/pivotal-pez/admin-portal/releases/latest 
+# and download adminportal.tgz
+
+$ tar -xvzf adminportal.tgz
+
+$ cd adminportal
+
+$ cf login -a [cf.api.domain] -u [cfadminuser] -p [adminuserpass] -o
+[mytargetorg] -s [mytargetspace] --skip-ssl-validation
+
+# this will setup a user provided service containing foundation api url and user
+information.
+# the user will need to have uaa.admin and cloudcontroller.admin priviledges.
+$ cat cups.txt | sh 
+
+$ cf push adminportal
+
+```
+
+
+## Running locally for development
 
 ```
 
