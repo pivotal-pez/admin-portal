@@ -9,18 +9,16 @@ build:
         name: env
         code: env
 
-    # Get the dependencies
     - script:
-        name: go get
+        name: go get and gopath setup
         code: |
           cd $WERCKER_SOURCE_DIR
           go version
           go get -u github.com/tools/godep
           export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
 
-    # Client JS Tests
     - script:
-        name: js tests
+        name: js unit tests
         code: |
           curl -sL https://deb.nodesource.com/setup | sudo bash -
           sudo apt-get install -y nodejs npm wget libfontconfig1 libfreetype6
@@ -28,15 +26,11 @@ build:
           npm install -g karma-cli
           (cd public/js/ && karma start karma.conf.js --single-run --log-level=debug)
 
-    # Test the project
     - script:
-        name: go test
+        name: go unit tests
         code: |
           godep go test ./... -v -race
 
-    # Setting the coverage watermark low.
-    # This should be raised as we gain more coverage...
-    # Test coverage for the project
     - script:
         name: go test cover
         code: |
@@ -46,13 +40,6 @@ build:
         name: build the server binary
         code: |
           godep go build main.go
-
-    #- internal/docker-push:
-        #username: $DOCKER_USER
-        #password: $DOCKER_P
-        #tag: ${WERCKER_GIT_COMMIT}.${WERCKER_GIT_BRANCH}
-        #repository: $DOCKER_REPO
-        #registry: $DOCKER_REGISTRY
 
     - script:
         name: add repo to artifact
@@ -92,22 +79,22 @@ deploy:
         git_email: $GITFLOW_EMAIL
 
     - script:
-        name: package release bundle 
-        code: |
-          tar -cvzf adminportal.tgz manifest.yml cups.txt public main Procfile
-
-    - script:
-        name: set release id var
+        name: set release id variable and version.txt file
         code: |
           git fetch --tags
           export WERCKER_GITHUB_CREATE_RELEASE_ID=`git log -n1 --pretty=format:%d HEAD | sed s/\ //g | awk -F',' '{print $2}'`
-          echo $WERCKER_GITHUB_CREATE_RELEASE_ID
+          echo $WERCKER_GITHUB_CREATE_RELEASE_ID > version.txt
           
+    - script:
+        name: package release tarball 
+        code: |
+          tar -cvzf adminportal.tgz manifest.yml cups.txt public main Procfile version.txt
+
     - github-create-release:
-            token: $GITHUB_TOKEN
-            tag: $WERCKER_GITHUB_CREATE_RELEASE_ID
-            title: Application $GITHUB_RELEASE_VERSION
-            draft: $RELEASE_DRAFT
+        token: $GITHUB_TOKEN
+        tag: $WERCKER_GITHUB_CREATE_RELEASE_ID
+        title: Admin Portal $WERCKER_GITHUB_CREATE_RELEASE_ID
+        draft: $RELEASE_DRAFT
     
     - github-upload-asset:
         token: $GITHUB_TOKEN
