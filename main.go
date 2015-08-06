@@ -11,6 +11,7 @@ import (
 	"github.com/jasonlvhit/gocron"
 	"github.com/martini-contrib/render"
 	"github.com/pivotal-pez/admin-portal/applications"
+	"github.com/pivotal-pez/admin-portal/events"
 	"github.com/pivotal-pez/admin-portal/users"
 	cf "github.com/pivotal-pez/pezdispenser/cloudfoundryclient"
 	"github.com/xchapter7x/cloudcontroller-client"
@@ -37,8 +38,9 @@ var (
 )
 
 type ghettoCache struct {
-	UserBlob *users.UserAggregate
-	AppsBlob *applications.AppAggregate
+	UserBlob   *users.UserAggregate
+	AppsBlob   *applications.AppAggregate
+	EventsBlob []cf.APIResponse
 }
 
 type cfAdminCreds struct {
@@ -77,6 +79,13 @@ func main() {
 		r.JSON(200, localCache.UserBlob)
 	})
 
+	m.Get("/v1/info/events", func(log *log.Logger, r render.Render) {
+		r.JSON(200, localCache.EventsBlob)
+	})
+
+	scheduler.Every(1).Minute().Do(func() {
+		FetchEventsInfo(cfapp, localLogger)
+	})
 	scheduler.Every(1).Minute().Do(func() {
 		FetchUserInfo(cfapp, localLogger)
 	})
@@ -88,6 +97,16 @@ func main() {
 		scheduler.Start()
 	}()
 	m.Run()
+}
+
+//FetchEventsInfo - function to poll for events information in the CCDB via REST API
+func FetchEventsInfo(cfapp *cfenv.App, log *log.Logger) {
+	log.Println("running FetchEventsInfo cron")
+	heritageClient := getHeritageClient(cfapp)
+	cfclient := cf.NewCloudFoundryClient(heritageClient, log)
+	eventSearch := new(events.EventSearch).Init(cfclient)
+	eventSearch.CompileRecentEvents()
+	localCache.EventsBlob = eventSearch.EventsBlob
 }
 
 //FetchAppsInfo - function to poll for app information in the CCDB via REST API
