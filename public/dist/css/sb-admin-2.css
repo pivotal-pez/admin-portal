@@ -12,6 +12,10 @@ body {
     width: 100%;
 }
 
+.h1, h1 {
+    font-size: 20px;
+}
+
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;
@@ -21,7 +25,7 @@ body {
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
-        #margin: 0 0 0 250px;
+        margin: 0 0 0 250px;
         padding: 0 30px;
         border-left: 1px solid #e7e7e7;
     }
