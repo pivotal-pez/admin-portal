@@ -9,6 +9,7 @@ import (
 type (
 	//AppAggregate - aggregation object for application information
 	AppAggregate struct {
+		TotalMemory        float64
 		TotalInstanceCount int
 		TotalRunningCount  int
 		TotalAppCount      int

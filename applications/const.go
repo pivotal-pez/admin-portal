@@ -13,4 +13,5 @@ const (
 	appRESTPath                = "/v2/apps"
 	applicationRunningValue    = "STARTED"
 	stateFieldname             = "state"
+	memoryFieldname            = "memory"
 )

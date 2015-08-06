@@ -33,6 +33,11 @@ var _ = Describe("AppSearch", func() {
 			Ω(appSearch.AppStats.TotalRunningCount).Should(Equal(controlRunningCount))
 		})
 
+		It("should log the proper running memory usage", func() {
+			controlMemory := float64(2)
+			Ω(appSearch.AppStats.TotalMemory).Should(Equal(controlMemory))
+		})
+
 		It("should log the proper Buildpack count", func() {
 			controlJBPCount := 1
 			controlRubyCount := 2

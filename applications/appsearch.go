@@ -45,6 +45,15 @@ func (s *AppSearch) processApplicationRecord(appRecord cf.APIResponse) {
 	s.processAI(appRecord)
 	s.processBP(appRecord)
 	s.processRunningApps(appRecord)
+	s.processMemory(appRecord)
+}
+
+func (s *AppSearch) processMemory(appRecord cf.APIResponse) {
+
+	if appRecord.Entity[stateFieldname].(string) == applicationRunningValue {
+		mem := appRecord.Entity[memoryFieldname].(float64)
+		s.AppStats.TotalMemory += (mem / 1024)
+	}
 }
 
 func (s *AppSearch) processAI(appRecord cf.APIResponse) {
