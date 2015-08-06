@@ -15,10 +15,7 @@ describe('AppsController', function() {
     it('should be initialized as undefined', function() {
       var $scope = {};
       var controller = $controller('AppsController', { $scope: $scope });
-      expect($scope.totalUsers).toEqual(undefined);
-      expect($scope.managedUsers).toEqual(undefined);
-      expect($scope.unManagedUsers).toEqual(undefined);
-      expect($scope.orphanedUsers).toEqual(undefined);
+      expect($scope.totalMemory).toEqual(undefined);
       expect($scope.totalInstanceCount).toEqual(undefined);
       expect($scope.totalRunningCount).toEqual(undefined);
       expect($scope.totalAppCount).toEqual(undefined);
@@ -38,6 +35,7 @@ describe('AppsController', function() {
   describe('.getAppsInfo', function() {
     controlTotalInstanceCount = 70;
     controlTotalRunningCount = 45 ;
+    controlTotalMemory = 45 ;
     controlTotalAppCount = 156;
     controlJavaBPCount = 21;
     controlRubyBPCount = 8;
@@ -56,6 +54,7 @@ describe('AppsController', function() {
       it('should populate the app fields for display', function() {
         $httpBackend.when('GET', appsInfoURI).respond({"TotalInstanceCount" : controlTotalInstanceCount,
                                                       "TotalRunningCount" : controlTotalRunningCount,
+                                                      "TotalMemory": controlTotalMemory,
                                                       "TotalAppCount" : controlTotalAppCount,
                                                       "JavaBPCount" : controlJavaBPCount,
                                                       "RubyBPCount" : controlRubyBPCount,
@@ -72,6 +71,7 @@ describe('AppsController', function() {
         $httpBackend.flush();
 
         expect($scope.totalInstanceCount).toBe(controlTotalInstanceCount);
+        expect($scope.totalMemory).toBe(controlTotalMemory);
         expect($scope.totalRunningCount).toBe(controlTotalRunningCount);
         expect($scope.totalAppCount).toBe(controlTotalAppCount);
         expect($scope.javaBPCount).toBe(controlJavaBPCount);
@@ -97,6 +97,7 @@ describe('AppsController', function() {
         $httpBackend.flush();
 
         expect($scope.totalInstanceCount).toBe(controlEmpty);
+        expect($scope.totalMemory).toBe(controlEmpty);
         expect($scope.totalRunningCount).toBe(controlEmpty);
         expect($scope.totalAppCount).toBe(controlEmpty);
         expect($scope.javaBPCount).toBe(controlEmpty);
