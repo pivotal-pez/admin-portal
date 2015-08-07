@@ -25,28 +25,28 @@ var _ = Describe("EventSearch", func() {
 		})
 
 		It("should populate eventsblob with a list of event objects", func() {
-			controlLength := 17
+			controlLength := 50
 			controlObject := cf.APIResponse{
 				Metadata: cf.APIMetadata{
-					GUID:      "73be434e-e703-4ffa-8e8c-40799eaf21a0",
-					URL:       "/v2/events/73be434e-e703-4ffa-8e8c-40799eaf21a0",
-					CreatedAt: "2015-08-06T16:05:40Z",
+					GUID:      "782c711f-ed87-487d-ab53-9d4f17d53b6a",
+					URL:       "/v2/events/782c711f-ed87-487d-ab53-9d4f17d53b6a",
+					CreatedAt: "2015-07-06T20:00:39Z",
 					UpdatedAt: "",
 				},
 				Entity: map[string]interface{}{
-					"actee_type":        "app",
-					"actee_name":        "adminportal",
-					"timestamp":         "2015-08-06T16:05:40Z",
-					"space_guid":        "255f7cf9-c855-47fb-af10-e03a0637912f",
-					"organization_guid": "45f92610-f258-4f6f-9846-67b1cd98aed3",
+					"actor":      "1a3cf3ba-dad6-4c92-981f-b58e0f939aa5",
+					"actor_name": "jcalabrese@pivotal.io",
 					"metadata": map[string]interface{}{
-						"request": map[string]interface{}{"state": "STARTED"},
+						"request": map[string]interface{}{"name": "hcfdev"},
 					},
-					"type":       "audit.app.update",
-					"actor":      "5b3f2caf-68c0-43c4-ab01-b8b1aabb5181",
-					"actor_type": "user",
-					"actor_name": "system-automate",
-					"actee":      "23a775f1-b8c4-4763-9810-560dca003354",
+					"actee_name":        "hcfdev",
+					"actee_type":        "app",
+					"actor_type":        "user",
+					"organization_guid": "45f92610-f258-4f6f-9846-67b1cd98aed3",
+					"space_guid":        "ea88ed9e-91f1-4763-8eef-54fe38acf603",
+					"timestamp":         "2015-07-06T20:00:39Z",
+					"type":              "audit.app.update",
+					"actee":             "a8e04af5-4e9a-465a-a924-08561cff964d",
 				},
 			}
 			Ω(len(eventSearch.EventsBlob)).Should(Equal(controlLength))

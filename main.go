@@ -83,7 +83,7 @@ func main() {
 		r.JSON(200, localCache.EventsBlob)
 	})
 
-	scheduler.Every(1).Minute().Do(func() {
+	scheduler.Every(10).Seconds().Do(func() {
 		FetchEventsInfo(cfapp, localLogger)
 	})
 	scheduler.Every(1).Minute().Do(func() {

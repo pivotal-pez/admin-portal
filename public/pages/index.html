@@ -53,54 +53,18 @@
             <!-- /.navbar-header -->
             <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                      <li class="list-group-item">
-                          <i class="fa fa-comment fa-fw"></i> New Comment
-                          <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                          </span>
+                <div class="sidebar-nav navbar-collapse" ng-controller="EventsController as ev">
+                    <ul class="nav" id="side-menu" >
+                      <li class="list-group-item" ng-repeat="(key, value) in events">
+                        <i class="fa fa-comment fa-fw"></i> 
+                        {*{ value.entity.type }*}
+                        {*{ value.entity.actor_name }*}
+                        {*{ value.entity.actee_name }*}
+                        {*{ value.entity.metadata }*}
+                        <span class="pull-right text-muted small">
+                          <em>{*{ value.entity.timestamp }*}</em>
+                        </span>
                       </li>
-                      <li class="list-group-item">
-                          <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                          <span class="pull-right text-muted small"><em>12 minutes </em>
-                          </span>
-                      </li>
-                      <li class="list-group-item">
-                          <i class="fa fa-envelope fa-fw"></i> Message Sent
-                          <span class="pull-right text-muted small"><em>27 minutes </em>
-                          </span>
-                      </li>
-                      <li class="list-group-item">
-                          <i class="fa fa-tasks fa-fw"></i> New Task
-                          <span class="pull-right text-muted small"><em>43 minutes </em>
-                          </span>
-                      </li>
-                      <li class="list-group-item">
-                          <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                          <span class="pull-right text-muted small"><em>11:32 </em>
-                          </span>
-                      </li>
-                      <li class="list-group-item">
-                          <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                          <span class="pull-right text-muted small"><em>11:13 </em>
-                          </span>
-                      </li>
-                      <li class="list-group-item">
-                          <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                          <span class="pull-right text-muted small"><em>10:57 </em>
-                          </span>
-                      </li>
-                      <li class="list-group-item">
-                          <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                          <span class="pull-right text-muted small"><em>9:49 </em>
-                          </span>
-                      </li>
-                      <li class="list-group-item">
-                          <i class="fa fa-money fa-fw"></i> Payment Received
-                          <span class="pull-right text-muted small"><em>Yesterday</em>
-                          </span>
-                      </li>
-
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -285,6 +249,7 @@
     <script src="../bower_components/tc-angular-chartjs/dist/tc-angular-chartjs.min.js"></script>
     <script src="../js/users.js"></script>
     <script src="../js/apps.js"></script>
+    <script src="../js/events.js"></script>
     <script src="../js/main.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
