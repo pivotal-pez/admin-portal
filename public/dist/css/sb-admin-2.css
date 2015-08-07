@@ -39,6 +39,11 @@ body {
     overflow: hidden;
 }
 
+.entity-metadata {
+    overflow: hidden;
+    width: 90%;
+}
+
 .navbar-top-links {
     margin-right: 0;
 }
