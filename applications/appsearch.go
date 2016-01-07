@@ -32,12 +32,24 @@ func (s *AppSearch) GetAppCount() (appCount int) {
 //CompileAllApps - compile the information for all of your applications
 func (s *AppSearch) CompileAllApps() {
 	var responseList cf.APIResponseList
-	res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, appRESTPath, url.QueryEscape(fmt.Sprintf("results-per-page=%d", s.AppStats.TotalAppCount)))
+	res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, appRESTPath, url.QueryEscape(fmt.Sprintf("results-per-page=%d", 100)))
 	bodyBytes, _ := ioutil.ReadAll(res.Body)
 	json.Unmarshal(bodyBytes, &responseList)
 
 	for _, applicationRecord := range responseList.Resources {
 		s.processApplicationRecord(applicationRecord)
+	}
+
+	for responseList.NextURL != "" {
+		nextURL, _ := url.Parse(responseList.NextURL)
+		res := s.Client.Query("GET", nextURL.Host, nextURL.Path, nextURL.RawQuery)
+		bodyBytes, _ := ioutil.ReadAll(res.Body)
+		responseList = cf.APIResponseList{}
+		json.Unmarshal(bodyBytes, &responseList)
+
+		for _, applicationRecord := range responseList.Resources {
+			s.processApplicationRecord(applicationRecord)
+		}
 	}
 }
 
