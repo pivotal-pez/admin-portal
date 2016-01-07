@@ -42,7 +42,7 @@ func (s *AppSearch) CompileAllApps() {
 
 	for responseList.NextURL != "" {
 		nextURL, _ := url.Parse(responseList.NextURL)
-		res := s.Client.Query("GET", nextURL.Host, nextURL.Path, nextURL.RawQuery)
+		res := s.Client.Query("GET", s.ClientTargetInfo.APIEndpoint, nextURL.Path, nextURL.RawQuery)
 		bodyBytes, _ := ioutil.ReadAll(res.Body)
 		responseList = cf.APIResponseList{}
 		json.Unmarshal(bodyBytes, &responseList)
