@@ -144,9 +144,9 @@ func getAdminCreds(cfapp *cfenv.App) (adminCreds *cfAdminCreds) {
 	if cfAdminService, err := cfapp.Services.WithName(AdminServiceName); err == nil {
 		creds := cfAdminService.Credentials
 		adminCreds = &cfAdminCreds{
-			AdminURI:  creds[AdminURI],
-			AdminUser: creds[AdminUser],
-			AdminPass: creds[AdminPass],
+			AdminURI:  creds[AdminURI].(string),
+			AdminUser: creds[AdminUser].(string),
+			AdminPass: creds[AdminPass].(string),
 			LoginURI:  fmt.Sprintf("https://%s.%s", "login", creds[AdminURI]),
 			APIURI:    fmt.Sprintf("https://%s.%s", "api", creds[AdminURI]),
 		}
