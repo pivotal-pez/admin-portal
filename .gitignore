@@ -32,3 +32,4 @@ vcap_services_template.json
 admin-portal
 coverage.out
 node_modules
+main
