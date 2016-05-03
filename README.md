@@ -6,7 +6,7 @@
 
 ```
 # go to:
-# https://github.com/pivotal-pez/admin-portal/releases/latest 
+# https://github.com/pivotal-pez/admin-portal/releases/latest
 # and download adminportal.tgz
 
 $ tar -xvzf adminportal.tgz
@@ -18,8 +18,8 @@ $ cf login -a [cf.api.domain] -u [cfadminuser] -p [adminuserpass] -o
 
 # this will setup a user provided service containing foundation api url and user
 information.
-# the user will need to have uaa.admin and cloudcontroller.admin priviledges.
-$ cat cups.txt | sh 
+# the user will need to have uaa.admin and cloudcontroller.admin privileges.
+$ cat cups.txt | sh
 
 $ cf push adminportal
 
