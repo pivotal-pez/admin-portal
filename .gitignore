@@ -33,3 +33,5 @@ admin-portal
 coverage.out
 node_modules
 main
+_temp
+_cache

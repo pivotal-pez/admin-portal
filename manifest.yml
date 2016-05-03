@@ -1,7 +1,6 @@
 ---
 name: adminportal
-buildpack: http://github.com/ryandotsmith/null-buildpack.git
-command: ./main
+buildpack: go_buildpack
+command: admin-portal
 services:
 - admin-user-information
-
