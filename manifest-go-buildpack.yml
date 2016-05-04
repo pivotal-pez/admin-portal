@@ -1,0 +1,6 @@
+---
+name: adminportal
+buildpack: go_buildpack
+command: admin-portal
+services:
+- admin-user-information
