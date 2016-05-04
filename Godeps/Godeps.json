@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/pivotalservices/admin-portal",
+	"ImportPath": "github.com/pivotal-pez/admin-portal",
 	"GoVersion": "go1.6",
 	"GodepVersion": "v62",
 	"Deps": [
@@ -33,21 +33,6 @@
 		{
 			"ImportPath": "github.com/oxtoacart/bpool",
 			"Rev": "4e1c5567d7c2dd59fa4c7c83d34c2f3528b025d6"
-		},
-		{
-			"ImportPath": "github.com/pivotal-pez/admin-portal/applications",
-			"Comment": "v1.0.6",
-			"Rev": "61dfa2337c6dc609c48b1d1c20156c5161bcfdd3"
-		},
-		{
-			"ImportPath": "github.com/pivotal-pez/admin-portal/events",
-			"Comment": "v1.0.6",
-			"Rev": "61dfa2337c6dc609c48b1d1c20156c5161bcfdd3"
-		},
-		{
-			"ImportPath": "github.com/pivotal-pez/admin-portal/users",
-			"Comment": "v1.0.6",
-			"Rev": "61dfa2337c6dc609c48b1d1c20156c5161bcfdd3"
 		},
 		{
 			"ImportPath": "github.com/pivotal-pez/pezdispenser/cloudfoundryclient",
