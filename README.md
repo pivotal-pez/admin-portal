@@ -54,3 +54,12 @@ $ ./runlocaldeploy myenv
 $ echo "open ${DOCKER_HOST} in your browser to view this app locally"
 
 ```
+
+## SSL verification
+
+If you're running in with a self signed cert (pcfdev, bosh lite etc.) run the
+following to disable certificate validation.
+
+```
+cf set-env adminportal SKIP_SSL_VERIFY true
+```
