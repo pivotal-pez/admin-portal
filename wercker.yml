@@ -1,4 +1,4 @@
-box: google/golang:1.3.1
+box: google/golang:1.6
 build:
   # The steps that will be executed on build
   steps:
@@ -84,9 +84,9 @@ deploy:
           git fetch --tags
           export WERCKER_GITHUB_CREATE_RELEASE_ID=`git log -n1 --pretty=format:%d HEAD | sed s/\ //g | awk -F',' '{print $2}'`
           echo $WERCKER_GITHUB_CREATE_RELEASE_ID > version.txt
-          
+
     - script:
-        name: package release tarball 
+        name: package release tarball
         code: |
           tar -cvzf adminportal.tgz manifest.yml cups.txt public main Procfile version.txt README.md
 
@@ -95,7 +95,7 @@ deploy:
         tag: $WERCKER_GITHUB_CREATE_RELEASE_ID
         title: Admin Portal $WERCKER_GITHUB_CREATE_RELEASE_ID
         draft: $RELEASE_DRAFT
-    
+
     - github-upload-asset:
         token: $GITHUB_TOKEN
         file: adminportal.tgz
