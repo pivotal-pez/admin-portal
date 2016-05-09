@@ -6,7 +6,7 @@
 
 ```
 # go to:
-# https://github.com/pivotal-pez/admin-portal/releases/latest 
+# https://github.com/pivotal-pez/admin-portal/releases/latest
 # and download adminportal.tgz
 
 $ tar -xvzf adminportal.tgz
@@ -18,8 +18,8 @@ $ cf login -a [cf.api.domain] -u [cfadminuser] -p [adminuserpass] -o
 
 # this will setup a user provided service containing foundation api url and user
 information.
-# the user will need to have uaa.admin and cloudcontroller.admin priviledges.
-$ cat cups.txt | sh 
+# the user will need to have uaa.admin and cloudcontroller.admin privileges.
+$ cat cups.txt | sh
 
 $ cf push adminportal
 
@@ -53,4 +53,13 @@ $ ./runlocaldeploy myenv
 
 $ echo "open ${DOCKER_HOST} in your browser to view this app locally"
 
+```
+
+## SSL verification
+
+If you're running in with a self signed cert (pcfdev, bosh lite etc.) run the
+following to disable certificate validation.
+
+```
+cf set-env adminportal SKIP_SSL_VERIFY true
 ```

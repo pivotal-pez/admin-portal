@@ -1,14 +1,12 @@
 {
 	"ImportPath": "github.com/pivotal-pez/admin-portal",
-	"GoVersion": "go1.4.2",
-	"Packages": [
-		"./..."
-	],
+	"GoVersion": "go1.6",
+	"GodepVersion": "v62",
 	"Deps": [
 		{
 			"ImportPath": "github.com/cloudfoundry-community/go-cfenv",
-			"Comment": "v1.11",
-			"Rev": "d09cf526a66903121cc1387caa5951b9dcb35642"
+			"Comment": "v1.12-2-gb4bebec",
+			"Rev": "b4bebec47a425334d2a076cf99329464c9e611f3"
 		},
 		{
 			"ImportPath": "github.com/codegangsta/inject",
@@ -17,43 +15,33 @@
 		},
 		{
 			"ImportPath": "github.com/go-martini/martini",
-			"Comment": "v1.0-114-g6241001",
-			"Rev": "6241001738f6e1b1ea7c4a4089195e1b0681609a"
+			"Comment": "v1.0-184-g0c6ad59",
+			"Rev": "0c6ad5903d2bf9337762caa9c357247279c230c3"
 		},
 		{
 			"ImportPath": "github.com/jasonlvhit/gocron",
-			"Rev": "46aa69e77e4ee58d16bc909b56bc4d1dabb93c6b"
+			"Rev": "0b564bf03e9665599efbcba1c6fba3d84212c197"
 		},
 		{
 			"ImportPath": "github.com/martini-contrib/render",
-			"Rev": "b65063311fac6cbf84d3538f5715f7847e648322"
+			"Rev": "ec18f8345a1181146728238980606fb1d6f40e8c"
 		},
 		{
 			"ImportPath": "github.com/mitchellh/mapstructure",
-			"Rev": "442e588f213303bec7936deba67901f8fc8f18b1"
-		},
-		{
-			"ImportPath": "github.com/onsi/ginkgo",
-			"Comment": "v1.1.0-30-g5ce32b7",
-			"Rev": "5ce32b7910cdddcdd8bac6d761e2de9f27f9377b"
-		},
-		{
-			"ImportPath": "github.com/onsi/gomega",
-			"Comment": "v1.0-26-gdc751ce",
-			"Rev": "dc751ce5f266d83c26fae5c0a9093973b29cb61d"
+			"Rev": "281073eb9eb092240d33ef253c404f1cca550309"
 		},
 		{
 			"ImportPath": "github.com/oxtoacart/bpool",
-			"Rev": "754d38fccfc6e52083355014b6abc8d626445dfd"
+			"Rev": "4e1c5567d7c2dd59fa4c7c83d34c2f3528b025d6"
 		},
 		{
 			"ImportPath": "github.com/pivotal-pez/pezdispenser/cloudfoundryclient",
-			"Comment": "v0.0.22-18-ga6c94fd",
-			"Rev": "a6c94fded031c1020feb3d4d16192ef84008281f"
+			"Comment": "v0.0.155",
+			"Rev": "768e2777520868857916b66cfd4cfb7149383ca5"
 		},
 		{
 			"ImportPath": "github.com/xchapter7x/cloudcontroller-client",
-			"Rev": "795e287327dd3faa6a5b65e000779cffe301cb3a"
+			"Rev": "2349c0bd742e1c1371d88954e991273582533a33"
 		}
 	]
 }

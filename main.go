@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 	"log"
 	"net/http"
@@ -49,6 +50,7 @@ type cfAdminCreds struct {
 	AdminPass string
 	LoginURI  string
 	APIURI    string
+	Insecure  bool
 }
 
 type heritage struct {
@@ -132,8 +134,14 @@ func FetchUserInfo(cfapp *cfenv.App, log *log.Logger) {
 
 func getHeritageClient(cfapp *cfenv.App) (heritageClient *heritage) {
 	creds := getAdminCreds(cfapp)
+
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: creds.Insecure},
+	}
+	client := &http.Client{Transport: tr}
+
 	heritageClient = &heritage{
-		Client:   ccclient.New(creds.LoginURI, creds.AdminUser, creds.AdminPass, new(http.Client)),
+		Client:   ccclient.New(creds.LoginURI, creds.AdminUser, creds.AdminPass, client),
 		ccTarget: creds.APIURI,
 	}
 	heritageClient.Login()
@@ -144,11 +152,12 @@ func getAdminCreds(cfapp *cfenv.App) (adminCreds *cfAdminCreds) {
 	if cfAdminService, err := cfapp.Services.WithName(AdminServiceName); err == nil {
 		creds := cfAdminService.Credentials
 		adminCreds = &cfAdminCreds{
-			AdminURI:  creds[AdminURI],
-			AdminUser: creds[AdminUser],
-			AdminPass: creds[AdminPass],
+			AdminURI:  creds[AdminURI].(string),
+			AdminUser: creds[AdminUser].(string),
+			AdminPass: creds[AdminPass].(string),
 			LoginURI:  fmt.Sprintf("https://%s.%s", "login", creds[AdminURI]),
 			APIURI:    fmt.Sprintf("https://%s.%s", "api", creds[AdminURI]),
+			Insecure:  "true" == os.Getenv("SKIP_SSL_VERIFY"),
 		}
 	} else {
 		panic(fmt.Sprintf("There is a problem with your required service binding %s: %s", AdminServiceName, err.Error()))

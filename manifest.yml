@@ -4,4 +4,3 @@ buildpack: http://github.com/ryandotsmith/null-buildpack.git
 command: ./main
 services:
 - admin-user-information
-
